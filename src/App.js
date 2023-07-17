@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import { decreaseLikes, green, increaseLikes } from "./actions";
 
 function App() {
+  const colour = useSelector((state) => state.colour);
+  const likes = useSelector((state) => state.image.likes);
+  const dispatch = useDispatch();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="App"
+      style={{
+        height: "100vh",
+        backgroundColor: colour,
+      }}
+    >
+      <h1 style={{ margin: 0 }}>Hello</h1>
+      <h1>Likes: {likes}</h1>
+      <button onClick={() => dispatch(increaseLikes())}>+</button>
+      <button onClick={() => dispatch(decreaseLikes())}>-</button>
+      <button onClick={() => dispatch(green())}>Green it</button>
     </div>
   );
 }
